@@ -64,9 +64,8 @@ class RedisClinet(object):
         if not exists, raise error
         :return: proxy, like 8.8.8.8:88
         """
-        # try to get proxy with max score
         proxies = self.db.zrangebyscore(
-            REDIS_KEY, PROXY_SCORE_MAX, PROXY_SCORE_MIN
+            REDIS_KEY, PROXY_SCORE_MAX, PROXY_SCORE_MAX
         )
         if len(proxies):
             return  convert_proxy_or_proxies(random.choice(proxies))
